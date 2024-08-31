@@ -1,14 +1,36 @@
-import ReactDOM from 'react-dom/client'
-import App from "./components/App.tsx";
+import ReactDOM from 'react-dom/client';
+import App from './components/App.tsx';
 import './styles.css';
-import React, {StrictMode} from "react";
+import { StrictMode } from 'react';
 import 'jotai-devtools/styles.css';
-import {BrowserRouter} from "react-router-dom";
+import NotFoundPage from './components/Pages/NotFoundPage.tsx';
+import PatientsPage from './components/Pages/PatientsPage.tsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import DiseasesPage from './components/Pages/DiseasesPage.tsx';
+import DiagnosesPage from './components/Pages/DiagnosesPage.tsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: '/patients',
+    element: <PatientsPage />,
+  },
+  {
+    path: '/diseases',
+    element: <DiseasesPage />
+  },
+  {
+    path: '/diagnoses',
+    element: <DiagnosesPage />
+  }
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
-    </StrictMode>
-)
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
